@@ -1,0 +1,21 @@
+[
+  {
+    "batch_code": "TB-CK-HB-02-001",
+    "cursor_key": "EX-TB-CK-HB-02-001-1",
+    "peak_temp": -15.0,
+    "threshold": -18.0,
+    "status": "开放",
+    "opened_at": "2026-11-18T07:05:00",
+    "note": "装卸门开启导致短时升温"
+  },
+  {
+    "batch_code": "TB-CK-HD-01-001",
+    "cursor_key": "EX-TB-CK-HD-01-001-1",
+    "peak_temp": -17.5,
+    "threshold": -16.0,
+    "status": "已闭",
+    "opened_at": "2026-11-17T09:00:00",
+    "closed_at": "2026-11-17T11:30:00",
+    "note": "已复核恢复正常"
+  }
+]

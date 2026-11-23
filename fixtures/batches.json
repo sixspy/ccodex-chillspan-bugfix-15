@@ -1,0 +1,42 @@
+[
+  {
+    "batch_code": "TB-CK-HD-01-001",
+    "chamber_code": "CK-HD-01",
+    "probe_code": "PR-HD-A1",
+    "cargo_ref": "疫苗托盘 A-88",
+    "status": "已入库",
+    "temp_points": [{"t": "08:00", "c": -19.2}, {"t": "09:00", "c": -19.0}, {"t": "10:00", "c": -18.8}],
+    "min_observed": -19.2,
+    "max_observed": -18.8
+  },
+  {
+    "batch_code": "TB-CK-HB-02-001",
+    "chamber_code": "CK-HB-02",
+    "probe_code": "PR-HB-B1",
+    "cargo_ref": "海鲜冷链 B-12",
+    "status": "已入库",
+    "temp_points": [{"t": "06:00", "c": -21.5}, {"t": "07:00", "c": -15.0}, {"t": "08:00", "c": -20.1}],
+    "min_observed": -21.5,
+    "max_observed": -15.0
+  },
+  {
+    "batch_code": "TB-CK-HN-03-001",
+    "chamber_code": "CK-HN-03",
+    "probe_code": "PR-HN-C1",
+    "cargo_ref": "果蔬托盘 C-05",
+    "status": "草稿",
+    "temp_points": []
+  },
+  {
+    "batch_code": "TB-CK-HD-01-002",
+    "chamber_code": "CK-HD-01",
+    "probe_code": "PR-HD-A2",
+    "cargo_ref": "生物制剂 D-01",
+    "status": "已封批",
+    "generation": 2,
+    "temp_points": [{"t": "12:00", "c": -19.5}, {"t": "13:00", "c": -19.3}],
+    "min_observed": -19.5,
+    "max_observed": -19.3,
+    "sealed_at": "2026-11-10T10:00:00"
+  }
+]

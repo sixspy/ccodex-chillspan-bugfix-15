@@ -1,0 +1,5 @@
+[
+  {"route_code": "RT-HD-HB-01", "origin_region": "华东", "dest_region": "华北", "cold_hours": 18.5, "vehicle_type": "16米冷藏车", "status": "启用"},
+  {"route_code": "RT-HN-HD-02", "origin_region": "华南", "dest_region": "华东", "cold_hours": 26.0, "vehicle_type": "12米冷藏车", "status": "启用"},
+  {"route_code": "RT-XN-HN-03", "origin_region": "西南", "dest_region": "华南", "cold_hours": 32.0, "vehicle_type": "铁路冷链", "status": "停用"}
+]

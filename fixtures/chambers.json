@@ -1,0 +1,6 @@
+[
+  {"chamber_code": "CK-HD-01", "region": "华东", "name": "上海浦东冷库甲", "target_min": -22, "target_max": -18, "quota_batches": 24, "status": "运行"},
+  {"chamber_code": "CK-HB-02", "region": "华北", "name": "天津滨海冷库乙", "target_min": -25, "target_max": -20, "quota_batches": 18, "status": "运行"},
+  {"chamber_code": "CK-HN-03", "region": "华南", "name": "广州南沙冷库丙", "target_min": 2, "target_max": 6, "quota_batches": 30, "status": "运行"},
+  {"chamber_code": "CK-XN-04", "region": "西南", "name": "成都双流冷库丁", "target_min": -5, "target_max": 0, "quota_batches": 15, "status": "维护"}
+]

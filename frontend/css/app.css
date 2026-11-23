@@ -1,0 +1,334 @@
+/* 冷链温谱管道：深青监控台 + 顶栏仪表 + 左窄轨 */
+:root {
+  --bg-deep: #04181f;
+  --bg-panel: #0a2a33;
+  --bg-panel-2: #0f3540;
+  --cyan: #22d3ee;
+  --cyan-dim: #0891b2;
+  --teal: #14b8a6;
+  --text: #e0f7fa;
+  --text-dim: #94a3b8;
+  --warn: #f59e0b;
+  --bad: #f87171;
+  --ok: #34d399;
+  --line: #1e4a57;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --font-ui: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "Cascadia Mono", "Consolas", monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: var(--font-ui);
+  color: var(--text);
+  background: radial-gradient(ellipse 120% 80% at 50% -20%, #0e4a5a 0%, var(--bg-deep) 55%);
+}
+
+.noscript, .boot-hint {
+  margin: 24px;
+  padding: 16px 20px;
+  background: #3f1d1d;
+  border: 1px solid var(--bad);
+  color: #fecaca;
+}
+
+.login-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.login-card {
+  width: min(440px, 100%);
+  background: var(--bg-panel);
+  border: 1px solid var(--cyan-dim);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  border-radius: 8px;
+}
+.login-card h1 {
+  font-size: 26px;
+  margin: 0 0 8px;
+  color: var(--cyan);
+  letter-spacing: 0.06em;
+}
+.login-card .sub {
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+.login-card label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin: 10px 0 4px;
+}
+.login-card input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: var(--bg-deep);
+  color: var(--text);
+  border-radius: 4px;
+}
+.login-card button {
+  margin-top: 18px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: linear-gradient(90deg, var(--cyan-dim), var(--teal));
+  color: #042f2e;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.err { margin-top: 12px; color: var(--bad); font-size: 13px; }
+
+.console { min-height: 100vh; display: flex; flex-direction: column; }
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: linear-gradient(180deg, #0d3844 0%, var(--bg-panel) 100%);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.brand {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+}
+.brand small {
+  display: block;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+  font-weight: 400;
+}
+.gauges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+}
+.gauge {
+  min-width: 76px;
+  padding: 8px 12px;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-align: center;
+}
+.gauge.warn { border-color: var(--warn); }
+.gauge .k { display: block; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; }
+.gauge .v { display: block; font-size: 20px; color: var(--teal); font-family: var(--font-mono); }
+.top-meta { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.top-meta button {
+  border: 1px solid var(--cyan-dim);
+  background: transparent;
+  color: var(--cyan);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.top-meta button:hover { background: rgba(34, 211, 238, 0.12); }
+
+.body { display: flex; flex: 1; min-height: 0; }
+.rail {
+  width: 112px;
+  flex-shrink: 0;
+  background: #062229;
+  border-right: 1px solid var(--line);
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rail button {
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 10px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  border-left: 3px solid transparent;
+}
+.rail button:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.rail button.active {
+  color: var(--cyan);
+  background: var(--bg-panel-2);
+  border-left-color: var(--cyan);
+}
+
+.main {
+  flex: 1;
+  padding: 16px 20px 40px;
+  overflow: auto;
+  max-width: calc(100vw - 112px);
+}
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+.panel h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: var(--cyan);
+}
+.panel .hint, .panel h3 {
+  color: var(--text-dim);
+  font-size: 13px;
+  margin: 0 0 14px;
+}
+.panel h3 { color: var(--teal); margin-top: 16px; }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .rail { width: 88px; }
+  .rail button { font-size: 11px; padding: 8px 4px; }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.form-row label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.form-row input, .form-row select, .form-row textarea, textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  background: var(--bg-deep);
+  color: var(--text);
+  border-radius: 4px;
+  font-size: 14px;
+}
+textarea { min-height: 72px; resize: vertical; font-family: var(--font-mono); font-size: 12px; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 14px;
+}
+.actions button, .mini-btn, button {
+  border: none;
+  background: var(--teal);
+  color: #042f2e;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.actions button.secondary, button.secondary {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-weight: 500;
+}
+.mini-btn { padding: 4px 8px; font-size: 11px; }
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.data-table th, .data-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 6px;
+  text-align: left;
+}
+.data-table th { color: var(--cyan-dim); font-size: 11px; letter-spacing: 0.06em; }
+.data-table tr:hover { background: rgba(34, 211, 238, 0.06); }
+.data-table tr.picked { background: rgba(20, 184, 166, 0.15); }
+.data-table.compact td, .data-table.compact th { padding: 5px 4px; }
+.table-wrap { overflow-x: auto; }
+.mono { font-family: var(--font-mono); font-size: 11px; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+}
+.badge.pass { border-color: var(--ok); color: var(--ok); }
+.badge.fail { border-color: var(--bad); color: var(--bad); }
+.badge.frozen { border-color: var(--text-dim); color: var(--text-dim); }
+.badge.done { border-color: var(--cyan-dim); color: var(--cyan); }
+
+.detail-box {
+  margin-top: 14px;
+  padding: 12px;
+  background: var(--bg-deep);
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.ok { color: var(--ok); }
+.bad { color: var(--bad); }
+
+.action-err, .ok-msg {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.action-err { background: rgba(248, 113, 113, 0.15); color: #fecaca; border: 1px solid var(--bad); }
+.ok-msg { background: rgba(52, 211, 153, 0.12); color: #a7f3d0; border: 1px solid var(--ok); }
+
+.lock-list { list-style: none; padding: 0; margin: 8px 0; font-size: 12px; color: var(--text-dim); }
+.lock-list li { padding: 4px 0; border-bottom: 1px solid var(--line); }
+
+/* 只读滚动条微调 */
+.main::-webkit-scrollbar { width: 8px; }
+.main::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+/* 表单块间距 */
+.form-block { margin-bottom: 12px; }
+
+/* 仪表辅助色 */
+.gauge.warn .v { color: var(--warn); }
+
+/* 登录与主台共用焦点 */
+input:focus, select:focus, textarea:focus {
+  outline: 1px solid var(--cyan);
+  outline-offset: 1px;
+}
+
+/* 链接型按钮禁用默认（面板内 button 已统一） */
+.panel ul { margin: 8px 0; padding-left: 18px; color: var(--text-dim); font-size: 12px; }
+.panel ul li { margin: 4px 0; }
+
+/* 顶栏在窄屏折行 */
+@media (max-width: 640px) {
+  .gauges { justify-content: flex-start; }
+  .gauge { min-width: 64px; }
+}

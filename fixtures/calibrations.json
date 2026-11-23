@@ -1,0 +1,5 @@
+[
+  {"probe_code": "PR-HD-A1", "calibrated_at": "2026-05-01T10:00:00", "offset_c": 0.1, "valid_until": "2026-12-01", "officer": "张工", "status": "有效"},
+  {"probe_code": "PR-HB-B1", "calibrated_at": "2026-04-15T14:00:00", "offset_c": -0.2, "valid_until": "2026-11-20", "officer": "李工", "status": "有效"},
+  {"probe_code": "PR-HN-C2", "calibrated_at": "2026-03-01T09:00:00", "offset_c": 0.0, "valid_until": "2026-07-01", "officer": "王工", "status": "有效"}
+]

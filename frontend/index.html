@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>冷链温谱管道</title>
+<link rel="stylesheet" href="/static/css/app.css"/>
+<script src="/static/vue.global.prod.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<noscript><p class="noscript">需要启用 JavaScript</p></noscript>
+<div id="boot-hint" class="boot-hint" style="display:none">
+  页面脚本未加载。请确认可访问 /static/vue.global.prod.js 与 /static/js/app.js
+</div>
+<script>
+setTimeout(function () {
+  if (!window.Vue || !document.querySelector("#app").__vue_app__) {
+    var e = document.getElementById("boot-hint");
+    if (e) e.style.display = "block";
+  }
+}, 1200);
+</script>
+<script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

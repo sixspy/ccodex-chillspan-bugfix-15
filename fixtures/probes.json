@@ -1,0 +1,9 @@
+[
+  {"probe_code": "PR-HD-A1", "chamber_code": "CK-HD-01", "model": "T-200", "online_status": "在线", "calibration_due": "2026-12-01"},
+  {"probe_code": "PR-HD-A2", "chamber_code": "CK-HD-01", "model": "T-200", "online_status": "在线", "calibration_due": "2026-08-15"},
+  {"probe_code": "PR-HB-B1", "chamber_code": "CK-HB-02", "model": "T-180", "online_status": "在线", "calibration_due": "2026-11-20"},
+  {"probe_code": "PR-HB-B2", "chamber_code": "CK-HB-02", "model": "T-180", "online_status": "离线", "calibration_due": "2025-09-01"},
+  {"probe_code": "PR-HN-C1", "chamber_code": "CK-HN-03", "model": "T-150", "online_status": "在线", "calibration_due": "2027-02-01"},
+  {"probe_code": "PR-HN-C2", "chamber_code": "CK-HN-03", "model": "T-150", "online_status": "在线", "calibration_due": "2027-03-15"},
+  {"probe_code": "PR-XN-D1", "chamber_code": "CK-XN-04", "model": "T-120", "online_status": "在线", "calibration_due": "2026-06-30"}
+]
