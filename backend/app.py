@@ -21,6 +21,7 @@ from reconcile_svc import router as reconcile_router
 from route_plan_svc import router as routes_router
 from seal_svc import router as seal_router
 from spectrum_svc import router as spectrum_router
+from state_svc import router as state_router
 from thaw_event_svc import router as thaw_router
 
 PRODUCT = "冷链温谱管道"
@@ -51,6 +52,7 @@ for r in (
     routes_router,
     carrier_router,
     thaw_router,
+    state_router,
 ):
     app.include_router(r)
 

@@ -65,7 +65,10 @@ export function createApi(getToken, onUnauthorized) {
     addCalibration: (data) =>
       req("/api/calibrations", { method: "POST", body: JSON.stringify(data) }),
     routes: () => req("/api/routes"),
+    routeSchedule: () => req("/api/routes/schedule"),
     createRoute: (data) => req("/api/routes", { method: "POST", body: JSON.stringify(data) }),
+    state: () => req("/api/state"),
+    stateOne: (id) => req(`/api/state/${id}`),
     audit: () => req("/api/audit?limit=150"),
     contention: () => req("/api/contention"),
     locks: () => req("/api/locks"),

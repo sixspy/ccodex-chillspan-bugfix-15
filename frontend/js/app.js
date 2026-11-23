@@ -48,6 +48,8 @@ createApp({
     const routes = ref([]);
     const carrierJobs = ref([]);
     const thawJobs = ref([]);
+    const states = ref([]);
+    const stateSummary = ref({});
     const dash = ref({});
 
     const chamberDetail = ref(null);
@@ -130,6 +132,19 @@ createApp({
     const sealedBatches = computed(() =>
       batches.value.filter((b) => b.status === "已封批")
     );
+    // 五面同源：按批次 id 索引单一态投影，供批次/封存/曲线/排程/任务五视图共用。
+    const stateByBatch = computed(() => {
+      const m = {};
+      for (const s of states.value) m[s.batch_id] = s;
+      return m;
+    });
+    function faceOf(batchId) {
+      return stateByBatch.value[batchId] || null;
+    }
+    function faceStatus(batchId) {
+      const f = faceOf(batchId);
+      return f ? f.status : "—";
+    }
 
     function fmtTemp(n) {
       if (n === null || n === undefined || n === "") return "—";
@@ -192,7 +207,7 @@ createApp({
       if (!token.value) return;
       clearFlash();
       try {
-        const [ch, pr, bt, ex, sl, sp, lg, cal, rt, d, cj, tj] = await Promise.all([
+        const [ch, pr, bt, ex, sl, sp, lg, cal, rt, d, cj, tj, st] = await Promise.all([
           api.chambers(),
           api.probes(),
           api.batches(),
@@ -205,6 +220,7 @@ createApp({
           api.dashboard(),
           api.carrierJobs(),
           api.thawJobs(),
+          api.state(),
         ]);
         chambers.value = ch.items || [];
         probes.value = pr.items || [];
@@ -218,6 +234,8 @@ createApp({
         dash.value = d || {};
         carrierJobs.value = cj.items || [];
         thawJobs.value = tj.items || [];
+        states.value = st.items || [];
+        stateSummary.value = st.summary || {};
 
         if (chambers.value.length && !probeForm.value.chamber_id) {
           probeForm.value.chamber_id = chambers.value[0].id;
@@ -437,7 +455,7 @@ createApp({
       clearFlash();
       try {
         const row = await api.thawStub(thawForm.value);
-        flashOk(`解冻空桩 #${row.job_id}`);
+        flashOk(`解冻空桩 #${row.job_id} · ${row.track || "甲"}轨`);
         await refresh();
       } catch (e) {
         flashErr(e);
@@ -469,6 +487,8 @@ createApp({
       routes,
       carrierJobs,
       thawJobs,
+      states,
+      stateSummary,
       dash,
       chamberDetail,
       probeDetail,
@@ -494,6 +514,9 @@ createApp({
       openableBatches,
       sealableBatches,
       sealedBatches,
+      stateByBatch,
+      faceOf,
+      faceStatus,
       login,
       logout,
       refresh,

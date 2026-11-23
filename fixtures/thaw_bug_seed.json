@@ -1,0 +1,34 @@
+{
+  "scenario": "解冻空桩误触封批写口（BUGFIX-15）",
+  "note": "种子夹具：解冻空桩提交在同一批次上仍改封批态。修复前 status 由已封批被写成已入库、sealed_at 被清空；修复后仅登记任务行，封批正式字段零改。",
+  "seed": {
+    "chamber_code": "CK-HN-03",
+    "probe_code": "PR-HN-C1",
+    "cargo_ref": "解冻种子货载",
+    "batch_code": "TB-SEED-THAW-001",
+    "temp_points": [
+      {"t": "10:00", "c": 2.5},
+      {"t": "11:00", "c": 4.0},
+      {"t": "12:00", "c": 5.5}
+    ]
+  },
+  "stub_request": {
+    "thaw_minutes": 30,
+    "mode": "卸货口"
+  },
+  "bug_signature": {
+    "status_before": "已封批",
+    "status_after_stub": "已入库",
+    "sealed_at_after_stub": null,
+    "batch_unchanged": false
+  },
+  "fixed_signature": {
+    "status_after_stub": "已封批",
+    "sealed_at_unchanged": true,
+    "seal_snapshots_unchanged": true,
+    "thaw_job_status": "空桩待办",
+    "batch_unchanged": true,
+    "track": "甲",
+    "cross_track_deviation": "空桩隔轨偏航"
+  }
+}

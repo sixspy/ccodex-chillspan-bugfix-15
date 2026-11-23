@@ -1,4 +1,4 @@
-name: chillspan
+name: chillspan-bugfix-15
 
 services:
   app:
@@ -8,7 +8,7 @@ services:
     volumes:
       - ./data:/app/data
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:11440/api/health')"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')"]
       interval: 5s
       timeout: 5s
       retries: 12

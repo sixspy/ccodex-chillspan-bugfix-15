@@ -20,6 +20,36 @@ def list_routes(authorization: AuthHeader = None):
         return {"items": [dict(r) for r in rows]}
 
 
+@router.get("/api/routes/schedule")
+def route_schedule(authorization: AuthHeader = None):
+    """排程视图：线路 × 批次态同源投影（只读，取 state_svc 单一读取口）。"""
+    require_user(authorization)
+    from state_svc import all_states
+
+    with connect() as conn:
+        routes = conn.execute("SELECT * FROM route_plans ORDER BY id").fetchall()
+        states = all_states(conn)
+    by_status: dict[str, int] = {}
+    for s in states:
+        by_status[s["status"]] = by_status.get(s["status"], 0) + 1
+    items = []
+    for r in routes:
+        items.append(
+            {
+                "route_id": r["id"],
+                "route_code": r["route_code"],
+                "origin_region": r["origin_region"],
+                "dest_region": r["dest_region"],
+                "cold_hours": r["cold_hours"],
+                "vehicle_type": r["vehicle_type"],
+                "status": r["status"],
+                "batch_states": by_status,
+                "consistent": all(s["consistent"] for s in states) if states else True,
+            }
+        )
+    return {"items": items, "batch_states": by_status}
+
+
 @router.get("/api/routes/{route_id}")
 def get_route(route_id: int, authorization: AuthHeader = None):
     require_user(authorization)
